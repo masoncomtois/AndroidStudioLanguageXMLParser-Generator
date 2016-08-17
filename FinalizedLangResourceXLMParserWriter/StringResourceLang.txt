@@ -1,0 +1,134 @@
+<resources>
+    <string name="app_name">inForceDigitalProcessTerminal</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!--Setup Wizard-->
+    <string name="action_settings">Settings</string>
+    <string name="select_language">Select Language</string>
+    <string name="device_setup_wizard">Device Setup Wizard</string>
+    <string name="new_inforce_device">Add New SMEMA I/O Device</string>
+    <string name="another_inforce_device">Add Another SMEMA I/O Device</string>
+    <string name="new_top_scanner">New Top Scanner</string>
+    <string name="new_bottom_scanner">New Bottom Scanner</string>
+    <string name="reconfig_top_scanner">Reconfigure Top Scanner</string>
+    <string name="reconfig_bottom_scanner">Reconfigure Bottom Scanner</string>
+    <string name="connect_inforce_device">Connect SMEMA I/O Device</string>
+    <string name="scanning_msg">Scanning...</string>
+    <string name="no_inforce_devices_connected_one">No SMEMA I/O Devices found</string>
+    <string name="no_inforce_devices_connected_two">Please connect a SMEMA I/O Device and click add new SMEMA I/O Device</string>
+    <string name="please_disconnect_all_but_one_inforce">Please disconnect all but one SMEMA I/O Device and scan again</string>
+    <string name="please_connect_a_new_inforce_device_to_configure">Please connect a new inForce Device to configure</string>
+    <string name="new_inforce_connected">New inForce Device connected</string>
+    <string name="smema_io_device">SMEMA I/O Device: </string>
+    <string name="successfully_added_io">Successfully added I/O Device</string>
+    <string name="failed_to_find_devices">Failed to find device</string>
+    <string name="bottom">Bot:</string>
+    <string name="top">Top:</string>
+    <string name="adapter_colon">Adapter: </string>
+    <string name="space_configured"> configured</string>
+    <string name="waiting_for_barcode">Waiting for barcode...</string>
+    <string name="please_scan_provided_barcode">Please scan the provided barcode with a new scanner</string>
+    <string name="added_top_scanner">Added Top Scanner</string>
+    <string name="added_bot_scanner">Added Bottom Scanner</string>
+    <string name="waiting_for_connection">Waiting for connection...</string>
+    <string name="please_connect_a_new_inforce_device">Please plug in a new SMEMA I/O Device and scan for a SMEMA I/O Device</string>
+    <string name="scan">scan</string>
+    <string name="dev_setup">Device Setup</string>
+    <string name="remove_scanner">Remove this scanner?</string>
+    <string name="remove_device">Remove this SMEMA I/O device?</string>
+    <string name="top_scanner">Top Scanner</string>
+    <string name="bottom_scanner">Bottom Scanner</string>
+    <string name="manage_config_devs">Manage Configured SMEMA Devices</string>
+    <string name="scanner_exists">Scanner is already registered</string>
+    <string name="current_dev">Current Device: </string>
+    <string name="no_current_dev">No Device Selected</string>
+    <string name="cannot_leave_config">Cannot Leave Configuration</string>
+    <string name="cannot_leave_no_dev">You must first configure a device</string>
+    <string name="cannot_leave_incplt">You must finish this device\'s configuration first</string>
+    <string name="removed_device">Successfully Removed SMEMA I/O Device</string>
+    <string name="removed_top_scanner">Successfully Removed Top Scanner</string>
+    <string name="removed_bottom_scanner">Successfully Removed Bottom Scanner</string>
+    <string name="no_dev_to_edit_config">No device configurations to edit</string>
+    <string name="could_not_find_dev">Could not open device: </string>
+    <string name="plug_in_scanner">Please plug in the scanner</string>
+
+    <!--XLink-->
+    <string name="select_xlink_adapter">Select xLink Adapter</string>
+    <string name="unable_to_configure_xlink_adapter">Unable to set xLink adapter</string>
+    <string name="configure_xlink_server_first">Set xLink Server First</string>
+    <string name="please_config_xlink_server_first">Please specify a valid xLink server before continuing</string>
+    <string name="settings_xlink_server_config">Set xLink Server</string>
+    <string name="configure_xlink_server">Set xLink Server</string>
+    <string name="xlink_has_no_adaps">xLink Server has no adapters</string>
+    <string name="configured_xlink_server">Successfully added xLink Server</string>
+    <string name="unable_to_config_xlink">Unable to Connect to xLink Server</string>
+    <string name="config_xlink_server_first">Specify xLink Server First</string>
+    <string name="set_adapter_4device">Set xLink Adapter</string>
+
+    <!--General Settings-->
+    <string name="settings_device_config">Configure SMEMA I/O Devices</string>
+    <string name="settings_upper_text">General Settings</string>
+    <string name="settings_lower_text"></string>
+    <string name="ok_all_lower">ok</string>
+    <string name="save">save</string>
+    <string name="enterpsswd">Enter Admin Passcodes</string>
+
+    <!--Network Setup-->
+    <string name="device_ip">Device IP</string>
+    <string name="use_dhcp">Use DHCP?</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
+    <string name="select_inforce_device">Select inForce Device</string>
+
+    <!--Activity Home Screen-->
+    <string name="share">Share</string>
+    <string name="send">Send</string>
+    <string name="configure_devices">Configure Devices</string>
+    <string name="admin_controls">Admin Controls</string>
+    <string name="help">Help</string>
+    <string name="communicate">Communicate</string>
+    <string name="dev_init_err">Device Initialization Error</string>
+    <string name="dev_init_err_msg">Please ensure that all configured devices are plugged into this tablet and are powered</string>
+    <string name="reconfig">Reconfigure Devices</string>
+
+    <!--Configuration Manager-->
+    <string name="new_key">new</string>
+    <string name="cancel">Cancel</string>
+    <string name="clear_slash_new">Clear/New</string>
+    <string name="save_and_exit">Save and Exit</string>
+
+    <!--xLink Server Setup-->
+    <string name="xlink_adapter_configuration">xLink Adapter Configuration</string>
+
+    <!--SMEMA Broadcast-->
+    <string name="aquiring_barcode">Aquiring Barcode</string>
+    <string name="SMEMA_io_exception">I/O Error</string>
+    <string name="verifying_barcode">Verifying Barcode</string>
+    <string name="io_exception_lower">Ensure this SMEMA I/O device is attached and powered</string>
+    <string name="validation_failed">Validation Error</string>
+    <string name="validation_failed_extended">Barcode failed xLink validation process</string>
+    <string name="rerouting_barcode">Rerouting Barcode</string>
+    <string name="waiting_for_unit">Waiting For Unit</string>
+    <string name="transfer_pending">Transfer Pending</string>
+    <string name="transferring_unit">Transferring Unit</string>
+    <string name="bypass_mode">ByPass Mode</string>
+
+    <!--Language Setup-->
+    <string name="no_language_selected">No Language Selected</string>
+
+    <!--Admin Setup-->
+    <string name="admin_setup_title">Administrator Passcode Configuration</string>
+    <string name="admin_setup">Setup Administrator Passcode</string>
+    <string name="reconfig_admin_code">Reconfigure Administrator Passcode</string>
+    <string name="enter_code_prompt">Please Enter New Administrator Passcode</string>
+    <string name="admin_code_configured">Administrator passcode successfully configured</string>
+    <string name="confirm_leave_title">No Administrator Passcode Configured</string>
+    <string name="confirm_leave">Leave without configuring an administrator passcode?</string>
+
+    <!--Device Fragment-->
+    <string name="last_barcode">Last Barcode Scanned:</string>
+    <string name="cannot_communicate_xlink">Can\'t Communicate with the xLink Server</string>
+
+</resources>
