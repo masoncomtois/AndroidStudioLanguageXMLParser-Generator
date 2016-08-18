@@ -18,26 +18,24 @@ string varNamesFile = "VariableNames.txt";
 
 vector <string> parseAndToVec(char firstStartTag, char secondStartTag, char endTag, char charConstraint, vector<string> &outputVec, string &filePath, string &outputFileName)
 {
-	//Character
 	char ch;
 
-	//File stream variable 
+	//File stream variable that will take in XML
 	ifstream xmlInput;
 
 	//Tells the ifstream to not ignore white space
 	xmlInput >> skipws;
 
-	//Open the original resource file 
 	xmlInput.open(filePath);
 
 	//This provides a way to look at the last couple of characters to determine
 	//if a sequence of characters is a part of a word 
 	vector<char> charBuffer;
 
-	//Roughly counts number of characters 
+	//Keeps track of characters 
 	size_t counter = 0;
 
-	//Counts the number of strings taken in
+	//Tracks index for the string array
 	size_t stringCount = 0;
 
 	while (xmlInput >> ch)
@@ -47,12 +45,13 @@ vector <string> parseAndToVec(char firstStartTag, char secondStartTag, char endT
 
 		//Checks to make sure the charBuffer size is greater than two to prevent
 		//an indexing error; Checks the conditions of the tags
-		//essentially it is looking for "> to be present
+		//looks for start tags to start putting elements in the current index
 		if (charBuffer.size() > 2  && charBuffer[counter - 2] == firstStartTag && charBuffer[counter - 1] == secondStartTag)
 		{
-			//Being of the loop for reading the whole word 
+			//Beggining of the loop for reading the whole word 
 			do
 			{
+				//If end tag is found, stop reading the word
 				if (ch == endTag && charBuffer[counter - 1] != charConstraint)
 				{
 					break;
@@ -94,79 +93,49 @@ vector <string> parseAndToVec(char firstStartTag, char secondStartTag, char endT
 //No charConstraint
 vector <string> parseAndToVecEng(char firstStartTag, char secondStartTag, char endTag, vector<string> &outputVec, string &filePath, string &outputFileName)
 {
-	//Character
 	char ch;
 
-	//File stream variable 
 	ifstream xmlInput;
 
-	//Tells the ifstream to not ignore white space
 	xmlInput >> noskipws;
 
-	//Open the original resource file 
 	xmlInput.open(filePath);
 
-	//This provides a way to look at the last couple of characters to determine
-	//if a sequence of characters is a part of a word 
 	vector<char> charBuffer;
 
-	//Roughly counts number of characters 
 	size_t counter = 0;
 
-	//Counts the number of strings taken in
 	size_t stringCount = 0;
 
 	while (xmlInput >> ch)
 	{
-		//pushes the current read character on the buffer
 		charBuffer.push_back(ch);
 
-		//Checks to make sure the charBuffer size is greater than two to prevent
-		//an indexing error; Checks the conditions of the tags
-		//essentially it is looking for "> to be present
 		if (charBuffer.size() > 2 && charBuffer[counter - 1] == secondStartTag && charBuffer[counter - 2] == firstStartTag)
-		{
-			//Being of the loop for reading the whole word 
+		{ 
 			do
 			{
-				//Break out of the loop if the character is '<' which indicates the end of what we want
 				if (ch == endTag)
 				{
 					break;
 				}
-
-				//Pushes an empty string back on the vector 
-				//If this wasn't here, there would be an out of bounds error
 				outputVec.push_back("");
 
-				//appends the current character to the string 
 				outputVec[stringCount] += ch;
 
-				//Continue to read in characters 
 			} while (xmlInput >> ch);
-
-			//increments the stringCount since it is done reading that string
 			stringCount++;
 		}
-
-		//increment counter
 		counter++;
 	}
-
-	//output stream variable 
 	ofstream parsedOutput;
 
-	//Open the parsed output file
 	parsedOutput.open(outputFileName);
 
-	//Start to iterate through the parsedWords vector 
 	for (size_t i = 0; i <= stringCount; i++)
 	{
-		//Output each string in the vector and then create a newline 
 		parsedOutput << outputVec[i] + "\n";
 	}
-
-	//Close the fstreams 
 	xmlInput.close();
 	parsedOutput.close();
 
@@ -224,6 +193,7 @@ void writeNewXML(vector<string> &inputVec, vector<string> &matchedVec, string &o
 	}
 }
 
+//The function to manage file name inquiry. A loop that only breaks until user types in 'y'
 void promptLoop(string &stringInQ, string &filePath)
 {
 	int counter = 0;
@@ -254,6 +224,7 @@ void promptLoop(string &stringInQ, string &filePath)
 	}
 }
 
+//Manages the dialog flow with the user
 void introCouts()
 {
 	string promptOne = "Please enter the file path for the orinial XML that you would like to be parsed. Use \\ instead of just \. e.g. C:\\Desktop\\myfile.txt: \n";
@@ -268,6 +239,7 @@ void introCouts()
 	cout << "Nein \n";
 	cout << "etc. \n";
 
+	//Prompt loop calls for user
 	promptLoop(promptOne, orignalXMLFilePath);
 	promptLoop(promptTwo, langFilePath);
 	promptLoop(promptThree, outputFile);
@@ -277,13 +249,22 @@ void introCouts()
 
 int main()
 {
+	//Call intro prompts
 	introCouts();
+
+	//Parse initial XML to the english list of variables
 	parseAndToVecEng('"', '>', '<', englishParsed, orignalXMLFilePath, englishListPath);
+
+	//Parse variables names from original XML
 	parseAndToVec('=', '\"', '\"', '=', varNames, orignalXMLFilePath, varNamesFile);
+
+	//Parse language file provided by the user
 	langFileToVec(langFilePath, parsedNewLangVec, varNames);
+
+	//Write the new XML document
 	writeNewXML(parsedNewLangVec, varNames, outputFile);
 
-	cout << "Everthing has now been parsed. Your files are now available. \n";
+	cout << "Everthing has now been parsed. Your files are now available where you specified them to be. \n";
 
 	cin.get();
 
