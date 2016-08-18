@@ -14,7 +14,7 @@ string orignalXMLFilePath;
 string langFilePath;
 string outputFile;
 string englishListPath;
-string varNamesFile = "VariableNames.txt";
+string varNamesFile;
 
 vector <string> parseAndToVec(char firstStartTag, char secondStartTag, char endTag, char charConstraint, vector<string> &outputVec, string &filePath, string &outputFileName)
 {
@@ -230,7 +230,8 @@ void introCouts()
 	string promptOne = "Please enter the file path for the orinial XML that you would like to be parsed. Use \\ instead of just \. e.g. C:\\Desktop\\myfile.txt: \n";
 	string promptTwo = "\nPlease enter the file path for the language file you would like an xml made for: \n";
 	string promptThree = "\nPlease enter the file path for the language file you would like an xml made for: \n";
-	string promptFour = "\nPlease specify where you would like words used (The english words associated with the variables in the original XML) to be located.";
+	string promptFour = "\nPlease specify where you would like words used (The english words associated with the variables in the original XML) to be located: \n";
+	string promptFive = "\nPlease specify where you would like the variable names file to be located and named: \n";
 
 	cout << "This is a quick utility to parse an XML language resource file. \n";
 	cout << "This file also generates the content of the XML for a new language file. \n";
@@ -245,6 +246,7 @@ void introCouts()
 	promptLoop(promptTwo, langFilePath);
 	promptLoop(promptThree, outputFile);
 	promptLoop(promptFour, englishListPath);
+	promptLoop(promptFive, varNamesFile);
 
 	cout << "Working...  \n";
 }
