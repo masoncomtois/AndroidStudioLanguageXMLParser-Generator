@@ -224,54 +224,55 @@ void writeNewXML(vector<string> &inputVec, vector<string> &matchedVec, string &o
 	}
 }
 
+void promptLoop(string &stringInQ, string &filePath)
+{
+	int counter = 0;
+	while (true)
+	{
+		cout << stringInQ;
+
+		getline(cin, filePath);
+
+		cout << "This is the file path you have selected. If you would like to retype type 'n', otherwise type 'y'. \n";
+		string resStr;
+		getline(cin, resStr);
+		if (resStr == "y")
+		{
+			break;
+		}
+		else if (resStr == "n")
+		{
+			cout << "Looping back... \n";
+			continue;
+		}
+		else
+		{
+			cout << "You typed an invalid response. Looping you back... \n";
+			continue;
+		}
+	
+	}
+}
+
 void introCouts()
 {
-	cout << "This is a quick utility to parse an XML language resource file.";
-	cout << "\n";
-	cout << "This file also generates the content of the XML for a new language file.";
-	cout << "\n";
-	cout << "For example a file in the following format works: ";
-	cout << "\n";
-	cout << "Ich habe";
-	cout << "\n";
-	cout << "Ja";
-	cout << "\n";
-	cout << "Nein";
-	cout << "\n";
+	string promptOne = "Please enter the file path for the orinial XML that you would like to be parsed. Use \\ instead of just \. e.g. C:\\Desktop\\myfile.txt: \n";
+	string promptTwo = "\nPlease enter the file path for the language file you would like an xml made for: \n";
+	string promptThree = "\nPlease enter the file path for the language file you would like an xml made for: \n";
+
+	cout << "This is a quick utility to parse an XML language resource file. \n";
+	cout << "This file also generates the content of the XML for a new language file. \n";
+	cout << "For example a file in the following format works: \n";
+	cout << "Ich habe \n";
+	cout << "Ja \n";
+	cout << "Nein \n";
 	cout << "etc. \n";
-	cout << "Please enter the file path for the orinial xml that you would like to be parsed. Use \\ instead of just \. e.g. C:\\Desktop\\myfile.txt: ";
-	cout << "\n";
 
-	getline(cin, orignalXMLFilePath);
+	promptLoop(promptOne, orignalXMLFilePath);
+	promptLoop(promptTwo, langFilePath);
+	promptLoop(promptThree, outputFile);
 
-	cout << "This is the file path you have selected: ";
-	cout << orignalXMLFilePath;
-	cout << "\n";
-	cout << "Please enter the file path for the language file you would like an xml made for: ";
-	cout << "\n";
-
-	getline(cin, langFilePath);
-
-	cout << "This is the file path you have selected: ";
-	cout << "\n";
-	cout << langFilePath;
-	cout << "\n";
-
-	cout << "Please enter the name you would like for the new language xml file with the file path included. e.g. C:\\Desktop\\myNEWfile.txt: ";
-	cout << "\n";
-
-	getline(cin, outputFile);
-
-	cout << "\n";
-	cout << "This is the file name you have entered: ";
-	cout << "\n";
-
-	cout << outputFile;
-
-	cout << "\n";
-
-	cout << "Working...";
-	cout << "\n";
+	cout << "Working...  \n";
 }
 
 int main()
@@ -282,8 +283,7 @@ int main()
 	langFileToVec(langFilePath, parsedNewLangVec, varNames);
 	writeNewXML(parsedNewLangVec, varNames, outputFile);
 
-	cout << "Everthing has now been parsed. Your files are now available.";
-	cout << "\n";
+	cout << "Everthing has now been parsed. Your files are now available. \n";
 
 	cin.get();
 
