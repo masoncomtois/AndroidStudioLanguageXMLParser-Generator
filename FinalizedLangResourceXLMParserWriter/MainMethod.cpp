@@ -15,6 +15,7 @@ string langFilePath;
 string outputFile;
 string englishListPath;
 string varNamesFile;
+string desktopPath = "C:\\Users\\mcomtois\\Desktop\\";
 
 vector <string> parseAndToVec(char firstStartTag, char secondStartTag, char endTag, char charConstraint, vector<string> &outputVec, string &filePath, string &outputFileName)
 {
@@ -120,9 +121,7 @@ vector <string> parseAndToVecEng(char firstStartTag, char secondStartTag, char e
 					break;
 				}
 				outputVec.push_back("");
-
 				outputVec[stringCount] += ch;
-
 			} while (xmlInput >> ch);
 			stringCount++;
 		}
@@ -144,6 +143,10 @@ vector <string> parseAndToVecEng(char firstStartTag, char secondStartTag, char e
 
 vector<string> langFileToVec(string &langFileName, vector<string> &outputVec, vector<string> &matchedVec)
 {
+	size_t charCount = 2;
+	vector<char> charBuff;
+	charBuff.push_back('a');
+	charBuff.push_back('a');
 	size_t stringCount = 0;
 	char char2;
 	for (size_t i = 0; i < matchedVec.size(); i++)
@@ -159,12 +162,30 @@ vector<string> langFileToVec(string &langFileName, vector<string> &outputVec, ve
 
 	while (langFile >> char2)
 	{
+		charBuff.push_back(char2);
 		if (char2 == '\n')
 		{
 			stringCount++;
 			continue;
 		}
-		outputVec[stringCount] += char2;
+
+		if (char2 == '\"')
+		{
+			outputVec[stringCount] += "\\";
+			outputVec[stringCount] += "\"";
+		}
+
+		else if (char2 == '\'')
+		{
+			outputVec[stringCount] += "\\";
+			outputVec[stringCount] += "\'";
+		}
+		else 
+		{
+			outputVec[stringCount] += char2;
+		}
+
+		//outputVec[stringCount] += char2;
 	}
 	return outputVec;
 }
@@ -199,9 +220,9 @@ void promptLoop(string &stringInQ, string &filePath)
 	int counter = 0;
 	while (true)
 	{
-		cout << stringInQ;
+		cout << stringInQ << " Please include the file extension as well (eg .txt, .xml). \n";
 
-		getline(cin, filePath);
+		getline(cin, addEscapeChars(filePath));
 
 		cout << "This is the file path you have selected. If you would like to retype type 'n', otherwise type 'y'. \n";
 		string resStr;
@@ -224,10 +245,30 @@ void promptLoop(string &stringInQ, string &filePath)
 	}
 }
 
+string addEscapeChars(string &input)
+{
+	string output;
+	for (size_t i = 0; i < input.length(); i++)
+	{
+		if (input[i] == '\\')
+		{
+			output.push_back('\\');
+			output.push_back('\\');
+			i++;
+		}
+		else
+		{
+			output.push_back(input[i]);
+			i++;
+		}
+	}
+	return output;
+}
+
 //Manages the dialog flow with the user
 void introCouts()
 {
-	string promptOne = "Please enter the file path for the orinial XML that you would like to be parsed. Use \\ instead of just \. e.g. C:\\Desktop\\myfile.txt: \n";
+	string promptOne = "Please enter the file path for the orinial XML that you would like to be parsed. Use \\ instead of just a single slash. e.g. C:\\Desktop\\myfile.txt: \n";
 	string promptTwo = "\nPlease enter the file path for the language file you would like an xml made for: \n";
 	string promptThree = "\nPlease enter the file path for the language file you would like an xml made for: \n";
 	string promptFour = "\nPlease specify where you would like words used (The english words associated with the variables in the original XML) to be located: \n";
@@ -257,16 +298,16 @@ int main()
 	introCouts();
 
 	//Parse initial XML to the english list of variables
-	parseAndToVecEng('"', '>', '<', englishParsed, orignalXMLFilePath, englishListPath);
+	parseAndToVecEng('\"', '>', '<', englishParsed, desktopPath + orignalXMLFilePath, desktopPath + englishListPath);
 
 	//Parse variables names from original XML
-	parseAndToVec('=', '\"', '\"', '=', varNames, orignalXMLFilePath, varNamesFile);
+	parseAndToVec('=', '\"', '\"', '=', varNames, desktopPath + orignalXMLFilePath, desktopPath + varNamesFile);
 
 	//Parse language file provided by the user
-	langFileToVec(langFilePath, parsedNewLangVec, varNames);
+	langFileToVec(desktopPath + langFilePath, parsedNewLangVec, varNames);
 
 	//Write the new XML document
-	writeNewXML(parsedNewLangVec, varNames, outputFile);
+	writeNewXML(parsedNewLangVec, varNames, desktopPath + outputFile);
 
 	cout << "Everthing has now been parsed. Your files are now available where you specified them to be. \n";
 
