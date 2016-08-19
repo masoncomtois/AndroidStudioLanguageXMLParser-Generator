@@ -15,7 +15,7 @@ string langFilePath;
 string outputFile;
 string englishListPath;
 string varNamesFile;
-string desktopPath = "C:\\Users\\mcomtois\\Desktop\\";
+string desktopPath = "";//"C:\\Users\\mcomtois\\Desktop\\";
 
 vector <string> parseAndToVec(char firstStartTag, char secondStartTag, char endTag, char charConstraint, vector<string> &outputVec, string &filePath, string &outputFileName)
 {
@@ -214,6 +214,26 @@ void writeNewXML(vector<string> &inputVec, vector<string> &matchedVec, string &o
 	}
 }
 
+//void addEscapeChars(string &input)
+//{
+//	string output;
+//	for (size_t i = 0; i < input.length(); i++)
+//	{
+//		if (input[i] == '\\')
+//		{
+//			output.push_back('\\');
+//			output.push_back('\\');
+//			i++;
+//		}
+//		else
+//		{
+//			output.push_back(input[i]);
+//			i++;
+//		}
+//	}
+//	input = output;
+//}
+
 //The function to manage file name inquiry. A loop that only breaks until user types in 'y'
 void promptLoop(string &stringInQ, string &filePath)
 {
@@ -222,7 +242,9 @@ void promptLoop(string &stringInQ, string &filePath)
 	{
 		cout << stringInQ << " Please include the file extension as well (eg .txt, .xml). \n";
 
-		getline(cin, addEscapeChars(filePath));
+		getline(cin, filePath);
+
+		//addEscapeChars(filePath);
 
 		cout << "This is the file path you have selected. If you would like to retype type 'n', otherwise type 'y'. \n";
 		string resStr;
@@ -243,26 +265,6 @@ void promptLoop(string &stringInQ, string &filePath)
 		}
 	
 	}
-}
-
-string addEscapeChars(string &input)
-{
-	string output;
-	for (size_t i = 0; i < input.length(); i++)
-	{
-		if (input[i] == '\\')
-		{
-			output.push_back('\\');
-			output.push_back('\\');
-			i++;
-		}
-		else
-		{
-			output.push_back(input[i]);
-			i++;
-		}
-	}
-	return output;
 }
 
 //Manages the dialog flow with the user
